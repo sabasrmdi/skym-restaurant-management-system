@@ -1,0 +1,85 @@
+﻿@page "/createOrder"
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>CreateOrder</PageTitle>
+
+<div class="container">
+    <h1>Create order</h1>
+    <a href="/">back to home page</a>
+    <EditForm Model="@order" OnValidSubmit="HandleValidSubmit">
+        <div class="form">
+            <InputNumber @bind-Value="order.CustomerId" placeholder="customerId" class="form-control" hidden />
+            <br />
+            <InputText @bind-Value="order.CustomerName" placeholder="customerName" class="form-control" />
+            <br />
+
+            <InputText @bind-Value="order.CustomerPhoneNumber" placeholder="customerPhoneNumber" class="form-control" />
+            <br />
+
+            <InputSelect @bind-Value="order.OrderType" class="form-control" required>
+                @foreach (var item in Enum.GetValues(typeof(OrderType)))
+                {
+                    <option value="@((int)item)">@((OrderType)(int)item)</option>
+                }
+            </InputSelect>
+            <br />
+
+            <InputSelect @bind-Value="order.WaiterId" class="form-control" required>
+                @foreach (var item in waiters)
+                {
+
+                    <option value=@(item.Id)
+                            @onselect="() => order.WaiterId=item.Id">
+                        @(item.FName + " " + item.LName)
+                    </option>
+                }
+            </InputSelect>
+            <br />
+
+            <InputSelect @bind-Value="order.TableId" class="form-control" required>
+
+                @foreach (var item in tables)
+                {
+                    <option value=@(item.Id)
+                            @onselect="() => order.TableId=item.Id">
+                        table #@item.Id
+                    </option>
+
+                }
+            </InputSelect>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </EditForm>
+</div>
+
+
+@code {
+    private Models.StartOrderForNewCustomerRequest order = new();
+    private List<Models.Table> tables = [];
+    private List<Models.Staff> waiters = [];
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        string apiUrlTables = configuration.GetValue<string>("api_url") + "/GetAllTables";
+        tables = (await httpClient.GetFromJsonAsync<List<Models.Table>>(apiUrlTables));
+        order.TableId = tables.First().Id;
+
+        string apiUrlWaiters = configuration.GetValue<string>("api_url") + "/GetStaffs";
+        waiters = (await httpClient.GetFromJsonAsync<List<Models.Staff>>(apiUrlWaiters))
+        .Where(a => a.Type == StaffType.Waiter).ToList();
+        order.WaiterId = waiters.First().Id;
+
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var createOrderApiUrl = configuration.GetValue<string>("api_url") + "/StartOrderForNewCustomer";
+        _ = (await httpClient.PostAsJsonAsync<StartOrderForNewCustomerRequest>(createOrderApiUrl, order));
+
+
+    }
+}

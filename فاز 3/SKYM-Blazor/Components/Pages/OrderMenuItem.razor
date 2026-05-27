@@ -1,0 +1,82 @@
+﻿@page "/orderMenuItem/{orderId:int}"
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>Order Menu Item</PageTitle>
+
+
+<div class="container">
+    <h1>Choose items for the Order</h1>
+    <a href="#">back to home page</a>
+    <div class="row">
+        @foreach (var item in menuItems.GroupBy(a => a.Type).Select(a => new { a.Key, Data = a.ToList() }))
+        {
+            <div class="col-6">
+                <h2>@(((MenuType)item.Key).ToString())</h2>
+                <table class="table">
+                    <tbody>
+                        @foreach (var subItem in item.Data)
+                        {
+                            <tr>
+                                <td>
+                                    @subItem.Name
+                                </td>
+                                <td>
+                                    @subItem.Price
+                                </td>
+                                <td>
+
+                                    <span class="text-secondary">@subItem.Count</span>
+                                </td>
+                                <td>
+                                    <span class="text-center btn btn-danger"
+                                          @onclick="async() => await DecreaseCount(subItem.Id)">-</span>
+
+                                    <span class="text-primary">
+                                        @orderMenuItems.FirstOrDefault(a => a.MenuId == subItem.Id)?.Count
+                                    </span>
+                                    <span class="text-center btn btn-success"
+                                          @onclick="async()=>await IncrementCount(subItem.Id)">+</span>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public int orderId { get; set; }
+    private List<Models.OrderMenu> orderMenuItems = [];
+    private List<Models.Menu> menuItems = [];
+    protected async override Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+    private async Task Refresh()
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/GetOrderMenuItems?orderId=" + orderId;
+        string apiUrlMenus = configuration.GetValue<string>("api_url") + "/GetMenus";
+        orderMenuItems = (await httpClient.GetFromJsonAsync<List<Models.OrderMenu>>(apiUrl));
+        menuItems = (await httpClient.GetFromJsonAsync<List<Models.Menu>>(apiUrlMenus));
+    }
+    private async Task IncrementCount(int menuId)
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + $"/AddItemToOrder?orderId={orderId}&&menuId={menuId}&&count={1}";
+        await httpClient.PostAsync(apiUrl, null);
+        await Refresh();
+    }
+    private async Task DecreaseCount(int menuId)
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + $"/AddItemToOrder?orderId={orderId}&&menuId={menuId}&&count={-1}";
+        await httpClient.PostAsync(apiUrl, null);
+        await Refresh();
+    }
+}

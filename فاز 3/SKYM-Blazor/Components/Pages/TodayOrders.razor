@@ -1,0 +1,139 @@
+﻿@page "/todayOrders"
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>Today Orders</PageTitle>
+
+<div class="container">
+    <h1>Today Orders</h1>
+    <a href="/">back to home page</a>
+    <div class="row">
+        <div class="col-4">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            in person
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in data.Where(a => a.OrderType == OrderType.InPersonCustomerOrder))
+                    {
+                        <tr>
+                            <td>@item.OrderId</td>
+                            <td>@item.CustomerName</td>
+                            <td>@(item.IsOrderFinished ? "Done" : "InProgress")</td>
+                            @if (!item.IsOrderFinished)
+                            {
+                                <td><a href="/orderMenuItem/@item.OrderId">go</a></td>
+                                <td><span class="text-danger" @onclick="async () => await EndOrder(item.OrderId)">end order</span></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <div class="col-4">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            delivery
+                        </th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in data.Where(a => a.OrderType == OrderType.DeliveryCustomerOrder))
+                    {
+                        <tr>
+                            <td>@item.OrderId</td>
+                            <td>@item.CustomerName</td>
+                            <td>@(item.IsOrderFinished ? "Done" : "InProgress")</td>
+                            @if (!item.IsOrderFinished)
+                            {
+                                <td><a href="/orderMenuItem/@item.OrderId">go</a></td>
+                                <td><span class="text-danger" @onclick="async () => await EndOrder(item.OrderId)">end order</span></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-4">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            Take away
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in data.Where(a => a.OrderType == OrderType.TakeawayCustomerOrder))
+                    {
+                        <tr>
+                            <td>@item.OrderId</td>
+                            <td>@item.CustomerName</td>
+                            <td>@(item.IsOrderFinished ? "Done" : "InProgress")</td>
+                            @if (!item.IsOrderFinished)
+                            {
+                                <td><a href="/orderMenuItem/@item.OrderId">go</a></td>
+                                <td><span class="text-danger" @onclick="async () => await EndOrder(item.OrderId)">end order</span></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+@code {
+    private List<Models.TodayOrder> data = [];
+    protected async override Task OnInitializedAsync()
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/TodayOrders";
+        data = (await httpClient.GetFromJsonAsync<List<Models.TodayOrder>>(apiUrl));
+    }
+    protected async Task EndOrder(int orderId)
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/EndOrder";
+
+        await httpClient.PostAsync(apiUrl + "?orderId=" + orderId, null);
+    }
+
+}

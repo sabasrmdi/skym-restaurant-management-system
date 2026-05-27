@@ -1,0 +1,45 @@
+﻿@page "/table"
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>Table</PageTitle>
+
+
+<div class="container">
+    <h1>Available tables</h1>
+    <a href="#">back to home page</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>available tables</th>
+                <th>seats</th>
+            </tr>   
+        </thead>
+        <tbody>
+            @foreach (var t in this.tables)
+            {
+                <tr class="@((t.Status == TableStatus.Busy)?"bg-danger":"bg-success")">
+                    <td>table #@t.Id </td>
+                    <td>@t.Capacity</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+@code {
+    private List<Models.Table> tables = [];
+    protected async override Task OnInitializedAsync()
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/GetAllTables";
+        tables = (await httpClient.GetFromJsonAsync<List<Models.Table>>(apiUrl));
+    }
+
+    private void IncrementCount()
+    {
+    }
+}

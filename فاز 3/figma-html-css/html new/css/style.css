@@ -1,0 +1,193 @@
+/* general section  */
+body {
+    background: #C79478;
+    height: 100vh;
+    width: 100%;
+}
+li {
+    list-style-type: none;
+    position: relative;
+}
+.menu {
+    padding: 0px;
+}
+
+ul {
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+table{
+    width: 100%
+}
+.font-pass{
+    font-family: "Itim";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
+h2{
+    font-family: "Itim";
+}
+p{
+    margin: 0px;
+}
+
+.left-float{
+    float: left;
+}
+.right-float {
+    float: right;
+}
+.pr-2{
+    padding-right: 20px;
+}
+
+.menu-table,
+.menu-tr,
+.menu-td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+/* first customer page */
+.logo-container{
+    position: relative;
+    width: 210px;
+    height: 50px;
+}
+.logo-right-img{
+    position: absolute;
+    left: 0;
+}
+.logo-center-text{
+    position: absolute;
+    font-size: 32px;
+    left: 50px;
+    font-family: "Just Another Hand", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: #8D4343;
+    margin: 20px 2px;
+}
+.logo-left-img{
+    position: absolute;
+    right: 0;
+}
+
+.menu-container{
+    width: 300px;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    height: 80px;
+}
+
+
+.menu-center-text{
+    font-family: "Overpass", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 26px;
+}
+.menu-left-img{
+    position: absolute;
+    left: 0;
+}
+.menu-center-text {
+    position: relative;
+    text-align: center;
+    padding: 15px 0px;
+}
+.menu-right-img {
+    position: absolute;
+    right: 0;
+}
+
+
+/* new order */
+.new-order{
+    padding: 50px 300px;
+}
+.new-order-menu-left-column{
+    width: 50%;
+}
+.new-order-menu-right-column {
+    width: 50%;
+}
+
+
+/* reservation */
+.reservation {
+    padding: 50px 300px;
+}
+
+
+/* orders */
+.orders {
+    padding: 50px 200px;
+}
+.border-tbl{
+    border: 1px solid black
+}
+
+.btn_filter{
+    color: white;
+    background: #6b4646;
+    width: 100px;
+    padding: 8px 10px;
+    border: none;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

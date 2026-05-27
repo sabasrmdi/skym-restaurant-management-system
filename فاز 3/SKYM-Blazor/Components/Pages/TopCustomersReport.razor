@@ -1,0 +1,58 @@
+﻿@page "/topCustomersReport"
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>Table</PageTitle>
+
+<h1>Table</h1>
+
+<div class="container">
+    <h1>top customers report</h1>
+    <a href="/">back to home page</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CustomerId</th>
+                <th>CustomerName</th>
+                <th>CountOfOrders</th>
+                <th>CustomerTotalSpending</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in this.data)
+            {
+                <tr>
+                    <td>
+                        @item.CustomerId
+                    </td>
+                    <td>
+                        @item.CustomerName
+                    </td>
+                    <td>
+                        @item.CountOfOrders
+                    </td>
+                    <td>
+                        @item.CustomerTotalSpending
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+@code {
+    private List<Models.TopCustomersReportModel> data = [];
+    protected async override Task OnInitializedAsync()
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/TopCustomersReport";
+        data = (await httpClient.GetFromJsonAsync<List<Models.TopCustomersReportModel>>(apiUrl));
+    }
+
+    private void IncrementCount()
+    {
+    }
+}

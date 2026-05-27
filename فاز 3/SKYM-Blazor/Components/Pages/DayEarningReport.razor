@@ -1,0 +1,50 @@
+﻿@page "/dayEarningReport"
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>Table</PageTitle>
+
+<div class="container">
+    <h1>Day earning report</h1>
+    <a href="/">back to home page</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Earning</th>
+                <th>OrderDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in this.data)
+            {
+                <tr>
+                  
+                    <td>
+                        @item.Earning
+                    </td>
+                    <td>
+                        @item.OrderDate
+                    </td>
+                
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+@code {
+    private List<Models.DayEarningReportModel> data = [];
+    protected async override Task OnInitializedAsync()
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/DayEarningReport";
+        data = (await httpClient.GetFromJsonAsync<List<Models.DayEarningReportModel>>(apiUrl));
+    }
+
+    private void IncrementCount()
+    {
+    }
+}

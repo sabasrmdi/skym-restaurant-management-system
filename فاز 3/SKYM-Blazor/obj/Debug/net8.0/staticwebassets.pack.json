@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SKYM-Blazor.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SKYM-Blazor.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\img\\logo-left-flower.png",
+      "PackagePath": "staticwebassets\\img\\logo-left-flower.png"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\img\\logo-right-flower.png",
+      "PackagePath": "staticwebassets\\img\\logo-right-flower.png"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\img\\menu-left-flower.png",
+      "PackagePath": "staticwebassets\\img\\menu-left-flower.png"
+    },
+    {
+      "Id": "D:\\term6\\Database\\project\\SKYM-Blazor\\wwwroot\\img\\menu-right-flower.png",
+      "PackagePath": "staticwebassets\\img\\menu-right-flower.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SKYM-Blazor.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SKYM-Blazor.props",
+      "PackagePath": "build\\SKYM-Blazor.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SKYM-Blazor.props",
+      "PackagePath": "buildMultiTargeting\\SKYM-Blazor.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SKYM-Blazor.props",
+      "PackagePath": "buildTransitive\\SKYM-Blazor.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

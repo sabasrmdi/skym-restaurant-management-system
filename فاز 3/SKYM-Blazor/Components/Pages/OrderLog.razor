@@ -1,0 +1,122 @@
+﻿@page "/orderLog"
+
+@using SKYM_Blazor.Models
+@rendermode InteractiveServer
+@inject HttpClient httpClient;
+@inject IConfiguration configuration;
+
+<PageTitle>Order Log</PageTitle>
+
+<div class="container">
+    <h1>Order Log</h1>
+    <a href="/">back to home page</a>
+
+    <div style="float: right; margin-bottom: 5px">
+        <button class="btn_filter" id="my_filter">filters</button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>OrderId</th>
+                <th>DateTime</th>
+                <th>Operation</th>
+                <th>Username</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in this.data)
+            {
+                <tr>
+
+                    <td>
+                        @item.OrderId
+                    </td>
+                    <td>
+                        @item.HappeningDateTime.ToString("yyyy:MM:dd hh:mm")
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @item.Username
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <input type="checkbox" />
+        <label for="music">show finished process</label>
+        <input type="checkbox" />
+        <label for="music">show in process orders</label>
+        <input type="checkbox" />
+        <label for="music">show cancelled process</label>
+        <hr>
+        sort by : 
+        <input type="checkbox" />
+        <label for="music">time</label> 
+        <input type="checkbox" />
+        <label for="music">number</label> 
+        <input type="checkbox" />
+        <label for="music">price (H to L)</label> 
+        <input type="checkbox" />
+        <label for="music">price (L to H)</label>
+        <button>Apply Filters</button>
+    </div>
+</div>
+
+<script>
+    // I get helped from "https://www.w3schools.com/howto/howto_css_modals.asp"
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("my_filter");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+</script>
+
+@code {
+    private List<Models.OrderLog> data = [];
+    protected async override Task OnInitializedAsync()
+    {
+        string apiUrl = configuration.GetValue<string>("api_url") + "/GetOrderLogData";
+        data = (await httpClient.GetFromJsonAsync<List<Models.OrderLog>>(apiUrl));
+    }
+
+    private void IncrementCount()
+    {
+    }
+}

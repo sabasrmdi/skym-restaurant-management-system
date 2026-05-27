@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>order reports</title>
+  </head>
+  <body>
+    <navbar>
+      <div class="logo-container">
+        <img
+          class="logo-right-img"
+          src="img/logo-left-flower.png"
+          width="50px"
+          alt=""
+        />
+        <a href="first_customer_page.html">
+          <p class="logo-center-text">Resurant Name</p>
+        </a>
+        <img
+          class="logo-left-img"
+          src="img/logo-right-flower.png"
+          width="50px"
+          alt=""
+        />
+      </div>
+    </navbar>
+
+    <menu class="menu reservation" style="font-family: 'Itim'">
+      <div style="float: right; margin-bottom: 5px">
+        <button class="btn_filter" id="my_filter">filters</button>
+      </div>
+
+      <table class="menu-table">
+        <thead>
+          <tr class="menu-tr">
+            <td class="menu-td" class="font-pass">order id</td>
+            <td class="menu-td" class="font-pass">time</td>
+            <td class="menu-td" class="font-pass">user name</td>
+            <td class="menu-td" class="font-pass">description</td>
+            <td class="menu-td" class="font-pass">action (create/update)</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="menu-tr" style="height: 400px">
+            <td class="menu-td"></td>
+            <td class="menu-td"></td>
+            <td class="menu-td"></td>
+            <td class="menu-td"></td>
+            <td class="menu-td"></td>
+          </tr>
+        </tbody>
+      </table>
+    </menu>
+
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <input type="checkbox" />
+        <label for="music">show finished process</label> <br>
+        <input type="checkbox" />
+        <label for="music">show in process orders</label> <br>
+        <input type="checkbox" />
+        <label for="music">show cancelled process</label> <br>
+        <hr>
+        sort by : <br>
+        <input type="checkbox" />
+        <label for="music">time</label> <br>
+        <input type="checkbox" />
+        <label for="music">number</label> <br>
+        <input type="checkbox" />
+        <label for="music">price (H to L)</label> <br>
+        <input type="checkbox" />
+        <label for="music">price (L to H)</label> <br> <br> <br>
+        <button>Apply Filters</button>
+      </div>
+    </div>
+  </body>
+
+  <script src="js/javascript.js"></script>
+</html>

@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+
+    <main>
+        <div class="px-4">
+            <div class="logo-container">
+                <img class="logo-right-img"
+                     src="/img/logo-left-flower.png"
+                     width="50px"
+                     alt="" />
+                <a href="/">
+                    <p class="logo-center-text">SKYM</p>
+                </a>
+                <img class="logo-left-img"
+                     src="/img/logo-right-flower.png"
+                     width="50px"
+                     alt="" />
+            </div>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
